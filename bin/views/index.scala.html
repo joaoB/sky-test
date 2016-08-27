@@ -1,0 +1,67 @@
+@(person: Form[CreatePersonForm])(implicit messages: Messages)
+
+@import helper._
+
+@main("Welcome to Play") {
+
+<div class="container">
+   <div ng-controller="TodoListController as todoList">
+<div class="row">
+  <div class="col-md-4">
+	<div class="panel panel-primary">
+      <div class="panel-heading">Sports</div>
+      <div class="panel-body" id="sportsContent">
+      	<ul>
+    		<li ng-repeat="s in sports">
+      			<span>{{s.name}}</span>
+    		</li>
+  		</ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+	<div class="panel panel-primary">
+      <div class="panel-heading">News</div>
+      <div class="panel-body" id="newsContent">
+		<ul>
+    		<li ng-repeat="n in news">
+      			<span>{{n.name}}</span>
+    		</li>
+  		</ul>
+	</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+	<div class="panel panel-primary">
+      <div class="panel-heading">Basket</div>
+      <div class="panel-body" id="basket">Panel Content</div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+	
+<h2>Todo</h2>
+
+ 
+        <ul>
+    <li ng-repeat="name in names">
+      <span>{{name}}</span>
+
+    </li>
+  </ul>
+    </div>
+
+
+
+  @form(routes.PersonController.addPerson()) {
+		@inputText(person("name"))
+		@inputText(person("age"))
+
+		<div class="buttons">
+			<input type="submit" value="Add Person"/>
+		</div>
+	}
+}
