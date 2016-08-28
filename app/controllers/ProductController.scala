@@ -15,6 +15,7 @@ import scala.concurrent.{ ExecutionContext, Future }
 import javax.inject._
 import dal.ProductRepository
 import dal.ProductRepository
+import play.mvc.Http
 
 class ProductController @Inject() (val messagesApi: MessagesApi)(implicit ec: ExecutionContext) extends Controller with I18nSupport {
 
@@ -24,7 +25,9 @@ class ProductController @Inject() (val messagesApi: MessagesApi)(implicit ec: Ex
   /**
    * A REST endpoint that gets all the products as JSON.
    */
-  def getProducts = Action {
+  def getProducts = Action { implicit request =>
+    val cid = request.cookies.get("costumerID")
+    //invoke costumer location service
     val products = repo.list
     Ok(Json.toJson(products))
   }

@@ -30,7 +30,12 @@
       <div class="panel-body" id="newsContent">
 		<ul>
     		<li ng-repeat="n in news">
-      			<span>{{n.name}}</span>
+			<input
+				type="checkbox"
+				name="selectedSports[]"
+				value="{{n.id}}"
+				ng-model="n.selected"> 
+      			{{n.name}}
     		</li>
   		</ul>
 	</div>
@@ -40,7 +45,18 @@
 	<div class="panel panel-primary">
       <div class="panel-heading">Basket</div>
       <div class="panel-body" id="basket">
-			<pre>{{selection|json}}</pre>
+     	 <ul>
+    		<li ng-repeat="s in selection">
+			<span
+				value="{{s.id}}">
+				{{s.name}}
+    		</span>
+    		<li ng-repeat="s in newsProduct">
+			<span
+				value="{{s.id}}">
+				{{s.name}}
+    		</span>
+  		</ul>
 		</div>
     </div>
   </div>
