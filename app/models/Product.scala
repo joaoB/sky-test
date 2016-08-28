@@ -32,7 +32,7 @@ object Location extends Enumeration {
   implicit val myEnumReads: Reads[Location.Value] = EnumUtils.enumReads(Location)
 }
 
-case class Product(name: String, category: Category.Value, location: Location.Value)
+case class Product(id: Long, name: String, category: Category.Value, location: Location.Value)
 
 object Product {
   implicit val productFormat = Json.format[Product]

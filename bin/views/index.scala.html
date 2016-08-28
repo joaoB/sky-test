@@ -13,7 +13,12 @@
       <div class="panel-body" id="sportsContent">
       	<ul>
     		<li ng-repeat="s in sports">
-      			<span>{{s.name}}</span>
+			<input
+				type="checkbox"
+				name="selectedSports[]"
+				value="{{s.id}}"
+				ng-model="s.selected"> 
+      			{{s.name}}
     		</li>
   		</ul>
       </div>
@@ -34,7 +39,9 @@
   <div class="col-md-4">
 	<div class="panel panel-primary">
       <div class="panel-heading">Basket</div>
-      <div class="panel-body" id="basket">Panel Content</div>
+      <div class="panel-body" id="basket">
+			<pre>{{selection|json}}</pre>
+		</div>
     </div>
   </div>
 </div>
