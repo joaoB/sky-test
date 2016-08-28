@@ -13,12 +13,7 @@ class ProductRepository {
   products.+=(Product(3, "Liverpool TV", Category.sports, Location.liverpool))
   products.+=(Product(4, "Sky News", Category.news, Location.everywhere))
   products.+=(Product(5, "Sky Sports News", Category.news, Location.everywhere))
-  
+
   def list = products.toList
-  
-  
-  def list(location: Location.Value){
-    products.filter { prod =>  prod.location == location || prod.location == Location.everywhere}.toList
-  }
 
 }

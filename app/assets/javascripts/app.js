@@ -1,7 +1,13 @@
-angular.module('todoApp', []).controller('TodoListController',
-		function($scope, $http, filterFilter) {
+angular.module('todoApp', [ 'ngCookies' ]).controller('TodoListController',
+		function($scope, $http, $cookies, $cookieStore) {
+			function generateCostumerID() {
+				return Math.floor(Math.random() * 10);
+			}
+
+			$cookieStore.put("costumerID", generateCostumerID());
 
 			$http.get('/products').success(function(data) {
+
 				$scope.sports = data.filter(function(e) {
 					return e.category == 'sports';
 				});
@@ -14,7 +20,7 @@ angular.module('todoApp', []).controller('TodoListController',
 				$scope.selection = [];
 
 				$scope.newsProduct = [];
-				
+
 				// helper method to get selected fruits
 				$scope.selectedFruits = function selectedFruits() {
 					return filterFilter($scope.fruits, {
@@ -28,14 +34,14 @@ angular.module('todoApp', []).controller('TodoListController',
 						return sport;
 					});
 				}, true);
-				
+
 				// watch sports for changes
 				$scope.$watch('news|filter:{selected:true}', function(nv) {
 					$scope.newsProduct = nv.map(function(n) {
 						return n;
 					});
 				}, true);
-				
+
 			});
 
 		});
