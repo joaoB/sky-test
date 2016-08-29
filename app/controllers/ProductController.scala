@@ -27,13 +27,17 @@ class ProductController @Inject() (val messagesApi: MessagesApi)(implicit ec: Ex
    * A REST endpoint that gets all the products as JSON.
    */
   def getProducts = Action { implicit request =>
-    val cid: Int = request.cookies.get("costumerID") match {
+    val cid: Int = request.cookies.get("customerID") match {
       case Some(cookie) => cookie.value.toInt
       case None         => -1
     }
     val location: Location.Value = CostumerLocation.getLocation(cid);
     val products = Catalogue.getProducts(location)
     Ok(Json.toJson(products))
+  }
+  
+  def confirmation = Action {
+    Ok(views.html.confirmation())
   }
 
 }

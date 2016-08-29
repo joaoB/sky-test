@@ -2,9 +2,13 @@
 
 @import helper._
 
-@main("Welcome to Play") {
+@main("Sky Shop") {
 
 <div class="container">
+  <div class="page-header">
+    <h1>Welcome to Sky Shop!</h1>      
+  </div>
+  
    <div ng-controller="TodoListController as todoList">
 <div class="row">
   <div class="col-md-4">
@@ -57,6 +61,8 @@
 				{{s.name}}
     		</span>
   		</ul>
+  		
+  		<button ng-click="checkout(selection, newsProduct)">Checkout</button>
 		</div>
     </div>
   </div>
@@ -64,27 +70,6 @@
 
 
 </div>
+</div>
 
-	
-<h2>Todo</h2>
-
- 
-        <ul>
-    <li ng-repeat="name in names">
-      <span>{{name}}</span>
-
-    </li>
-  </ul>
-    </div>
-
-
-
-  @form(routes.PersonController.addPerson()) {
-		@inputText(person("name"))
-		@inputText(person("age"))
-
-		<div class="buttons">
-			<input type="submit" value="Add Person"/>
-		</div>
-	}
 }
