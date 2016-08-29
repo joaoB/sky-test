@@ -1,4 +1,4 @@
-name := """play-scala-intro"""
+name := """sky-test"""
 
 version := "1.0-SNAPSHOT"
 
@@ -13,6 +13,8 @@ libraryDependencies ++= Seq(
   specs2 % Test
 )
 
-
+libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.0"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.0" % "test"
+libraryDependencies += "org.scalatest" % "scalatest_2.11" % "2.2.2"
 
 fork in run := true

@@ -20,7 +20,13 @@ class IntegrationSpec extends Specification {
 
       browser.goTo("http://localhost:" + port)
 
-      browser.pageSource must contain("Add Person")
+      browser.pageSource must contain("Sky Shop")
+      
+      browser.goTo("http://localhost:" + port + "/confirmation")
+
+      browser.pageSource must contain("Dear")
+      
+            
     }
   }
 }

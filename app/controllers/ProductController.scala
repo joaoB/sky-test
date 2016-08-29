@@ -1,46 +1,61 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-import play.api.i18n._
-import play.api.data.Form
-import play.api.data.Forms._
-import play.api.data.validation.Constraints._
+import scala.concurrent.ExecutionContext
+
+import dal.ProductRepository
+import javax.inject.Inject
+import models.Location
+import play.api.i18n.I18nSupport
+import play.api.i18n.MessagesApi
+import play.api.libs.json.JsValue.jsValueToJsLookup
 import play.api.libs.json.Json
-import models._
-import dal._
-
-import scala.concurrent.{ ExecutionContext, Future }
-
-import javax.inject._
-import dal.ProductRepository
-import dal.ProductRepository
-import play.mvc.Http
-import services.CostumerLocation
+import play.api.mvc.Action
+import play.api.mvc.Controller
 import services.Catalogue
-import play.api.libs.json.JsValue
-import play.api.libs.json.JsResult
-import play.api.libs.json.JsSuccess
+import services.CostumerLocation
 
 class ProductController @Inject() (val messagesApi: MessagesApi)(implicit ec: ExecutionContext) extends Controller with I18nSupport {
 
   val repo: ProductRepository = ProductRepository
 
-  /**
-   * A REST endpoint that gets all the products as JSON.
-   */
-  def getProducts = Action { implicit request =>
-    val cid: Int = request.cookies.get("customerID") match {
-      case Some(cookie) => cookie.value.toInt
-      case None         => -1
-    }
-    val location: Location.Value = CostumerLocation.getLocation(cid);
-    val products = Catalogue.getProducts(location)
-    Ok(Json.toJson(products))
+  def index = Action {
+    Ok(views.html.index())
   }
 
   def confirmation = Action {
     Ok(views.html.confirmation())
+  }
+
+  private def toInt(s: String): Option[Int] = {
+    try {
+      Some(s.toInt)
+    } catch {
+      case e: Exception => None
+    }
+  }
+
+  /**
+   * A REST endpoint that gets all the products as JSON.
+   */
+  def getProducts = Action { implicit request =>
+    val cid: Option[Int] = request.cookies.get("customerID") match {
+      case Some(cookie) => toInt(cookie.value)
+      case None         => None
+    }
+
+    val location = cid match {
+      case Some(elem) => CostumerLocation.getLocation(elem);
+      case None       => None
+    }
+
+    location match {
+      case Some(elem) => {
+        val products = Catalogue.getProducts(elem)
+        Ok(Json.toJson(products))
+      }
+      case None => Ok(Json.toJson(""))
+    }
+
   }
 
   def placeOrder = Action(parse.json) { implicit request =>
@@ -50,7 +65,7 @@ class ProductController @Inject() (val messagesApi: MessagesApi)(implicit ec: Ex
     val products = (request.body \ "products")
 
     val productsAsArray = products.asOpt[Array[Int]].getOrElse(Array.empty)
-    val productsAsString = productsAsArray mkString(", ") 
+    val productsAsString = productsAsArray mkString (", ")
 
     cid match {
       case Some(id) => {

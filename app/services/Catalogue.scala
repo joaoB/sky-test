@@ -8,6 +8,9 @@ class Catalogue {
 
   def getProducts(loc: Location.Value) = {
     val everywhere = Location.everywhere;
-    ProductRepository.products filter (p => p.location == loc || p.location == everywhere) toList
+    if (loc == everywhere)
+      ProductRepository.products toList
+    else
+      ProductRepository.products filter (p => p.location == loc || p.location == everywhere) toList
   }
 }

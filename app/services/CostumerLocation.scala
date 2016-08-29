@@ -5,13 +5,13 @@ import models.Location
 object CostumerLocation extends CostumerLocation
 class CostumerLocation {
 
-  def getLocation(id: Int): Location.Value =
+  def getLocation(id: Int): Option[Location.Value] =
     id match {
-      case -1             => Location.everywhere
-      case i if isEven(i) => Location.london
-      case i if isOdd(i)  => Location.liverpool
+      case i if isEven(i) => Some(Location.london)
+      case i if isOdd(i)  => Some(Location.liverpool)
+      case _              => None //Failure Exception
     }
 
-  def isEven(number: Int) = number % 2 == 0
-  def isOdd(number: Int) = !isEven(number)
+  private def isEven(number: Int) = number % 2 == 0
+  private def isOdd(number: Int) = !isEven(number)
 }
