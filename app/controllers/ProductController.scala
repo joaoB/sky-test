@@ -18,6 +18,9 @@ import dal.ProductRepository
 import play.mvc.Http
 import services.CostumerLocation
 import services.Catalogue
+import play.api.libs.json.JsValue
+import play.api.libs.json.JsResult
+import play.api.libs.json.JsSuccess
 
 class ProductController @Inject() (val messagesApi: MessagesApi)(implicit ec: ExecutionContext) extends Controller with I18nSupport {
 
@@ -35,9 +38,29 @@ class ProductController @Inject() (val messagesApi: MessagesApi)(implicit ec: Ex
     val products = Catalogue.getProducts(location)
     Ok(Json.toJson(products))
   }
-  
+
   def confirmation = Action {
     Ok(views.html.confirmation())
+  }
+
+  def placeOrder = Action(parse.json) { implicit request =>
+    //do something complex to place order...
+
+    val cid = (request.body \ "customerID").asOpt[Long]
+    val products = (request.body \ "products")
+
+    val productsAsArray = products.asOpt[Array[Int]].getOrElse(Array.empty)
+    val productsAsString = productsAsArray mkString(", ") 
+
+    cid match {
+      case Some(id) => {
+        val status = "Received order from client " + id + " for the following items: " + productsAsString
+        Ok(Json.toJson(Map("status" -> status)))
+      }
+      case None => BadRequest(Json.toJson(
+        Map("status" -> "Something went wrong")))
+    }
+
   }
 
 }

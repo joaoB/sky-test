@@ -1,5 +1,5 @@
-New log file opened at Sun Aug 28 20:40:54 CST 2016 by 836@LAPTOP-AHAVLMEL
-jvm 836@LAPTOP-AHAVLMEL
+New log file opened at Mon Aug 29 10:23:33 CST 2016 by 5484@LAPTOP-AHAVLMEL
+jvm 5484@LAPTOP-AHAVLMEL
 jvm vmName=Java HotSpot(TM) Client VM vmVendor=Oracle Corporation vmVersion=25.101-b13
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\bruno\play-scala-intro\project, returning: (play-scala-intro-build)
 Loading project definition from C:\Users\bruno\play-scala-intro\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@1e74763, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@16710f5, check cycles: false
 
 Initial source changes: 
 	removed:Set()
