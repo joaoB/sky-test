@@ -1,10 +1,10 @@
 package controllers
 
+import scala.annotation.implicitNotFound
 import scala.concurrent.ExecutionContext
 
 import dal.ProductRepository
 import javax.inject.Inject
-import models.Location
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
 import play.api.libs.json.JsValue.jsValueToJsLookup

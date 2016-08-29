@@ -1,3 +1,17 @@
-# Getting started with Play (Scala)
+# Sky test
 
-This project demonstrate how to create a simple CRUD application with Play.
+Sky - Product Selection project
+
+## How to run
+
+Start activator
+```bash
+activator
+```
+
+and then
+
+```bash
+run
+```
+Open your browser at address http://localhost:9000
