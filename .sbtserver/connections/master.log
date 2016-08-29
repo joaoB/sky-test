@@ -5,3 +5,6 @@ New client attempting to connect on port: 51838-51837
 This client on port 51838 has uuid 75f1baa3-cc07-4bd3-9ac4-1c600f9cfe71 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
 Connected Clients: play-fork-run-75f1baa3-cc07-4bd3-9ac4-1c600f9cfe71
 Taking next connection to: 51837
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51837
